@@ -24,9 +24,6 @@ public class PostServiceTest {
     @Autowired
     private PostService postService;
 
-    @MockBean
-    private JavaMailSender mailSender;
-
     @Test
     void getById는_존재하는_게시물을_내려준다(){
         // given
@@ -69,8 +66,9 @@ public class PostServiceTest {
 
         // then
         PostEntity postEntity = postService.getById(1);
+
         assertThat(postEntity.getContent()).isEqualTo("hello world :)");
-        assertThat(postEntity.getCreatedAt()).isGreaterThan(0);
+        assertThat(postEntity.getModifiedAt()).isGreaterThan(0);
         // assertThat(result.getCertificationCode()).isEqualTo("T.T"); // FIXME
 
     }
