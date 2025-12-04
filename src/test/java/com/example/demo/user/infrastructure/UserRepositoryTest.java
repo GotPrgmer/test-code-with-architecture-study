@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Sql("/sql/user-repository-test-data.sql")
 public class UserRepositoryTest {
     @Autowired
-    private UserRepository userRepository;
+    private UserJpaRepository userJpaRepository;
 
 
 //    //제대로 디비가 연결되었음 하니까 연결이 된다는 것을 검증
@@ -52,7 +52,7 @@ public class UserRepositoryTest {
 
         // when
 //        UserEntity user= userRepository.save(userEntity);
-        Optional<UserEntity> result = userRepository.findByIdAndStatus(1, UserStatus.ACTIVE);
+        Optional<UserEntity> result = userJpaRepository.findByIdAndStatus(1, UserStatus.ACTIVE);
 
         // then
         assertThat(result.isPresent()).isTrue();
@@ -70,7 +70,7 @@ public class UserRepositoryTest {
 
         // when
 //        UserEntity user = userRepository.save(userEntity);
-        Optional<UserEntity> result = userRepository.findByIdAndStatus(1, UserStatus.PENDING);
+        Optional<UserEntity> result = userJpaRepository.findByIdAndStatus(1, UserStatus.PENDING);
 
         // then
         assertThat(result.isPresent()).isFalse();
@@ -90,7 +90,7 @@ public class UserRepositoryTest {
 
         // when
 //        userRepository.save(userEntity);
-        Optional<UserEntity> result = userRepository.findByEmailAndStatus("kok202@naver.com", UserStatus.ACTIVE);
+        Optional<UserEntity> result = userJpaRepository.findByEmailAndStatus("kok202@naver.com", UserStatus.ACTIVE);
 
         // then
         assertThat(result.isPresent()).isTrue();
@@ -108,7 +108,7 @@ public class UserRepositoryTest {
 
         // when
 //        userRepository.save(userEntity);
-        Optional<UserEntity> result = userRepository.findByEmailAndStatus("kok202@naver.com", UserStatus.PENDING);
+        Optional<UserEntity> result = userJpaRepository.findByEmailAndStatus("kok202@naver.com", UserStatus.PENDING);
 
         // then
         assertThat(result.isPresent()).isFalse();
